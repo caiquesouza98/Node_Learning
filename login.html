@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+  <label >Nome:</label>
+  <input type="text" name="nome" id="nome" />
+  <label >Email:</label>
+  <input type="email" name="email" id="email" />
+  <label >Senha:</label>
+  <input type="password" name="senha" id="senha" />
+  <input type="submit" onclick="enviar()" value="Enviar" />
+</body>
+<script> 
+    async function enviar() {
+      var url = "http://localhost:3000/login";
+      var nomeLogin = document.getElementById("nome").value;
+      var emailLogin = document.getElementById("email").value;
+      var senhaLogin = document.getElementById("senha").value;
+
+      var data = {
+        'nome':nomeLogin,
+        'email':emailLogin,
+        'senha':senhaLogin,
+        'admin': false
+      };
+
+      var request = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const response = await fetch(request);
+      const json = await response.json();
+    }
+</script>
+</html>
